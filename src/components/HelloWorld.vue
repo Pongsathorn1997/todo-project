@@ -6,7 +6,7 @@
                    dense
                    dark
         >
-          <v-toolbar-title>This is Home Page</v-toolbar-title>
+          <v-toolbar-title>Welcome to todo-list application</v-toolbar-title>
         </v-app-bar>
         <v-parallax
             dark
@@ -18,16 +18,12 @@
               <v-flex xs12 sm8 md4>
                 <v-card>
                   <v-toolbar color="grey darken-3" dark flat>
-                    <v-toolbar-title>Welcome to todos application!</v-toolbar-title>
+                    <v-toolbar-title>Please select one of these option..</v-toolbar-title>
                   </v-toolbar>
                   <!--this is the input text field for username and password-->
                   <v-card-text>
-                    <v-form>
-                      Please select one of these option..
-                      <v-spacer></v-spacer>
-                    </v-form>
                     <v-btn class="d-flex justify-center md4 mt-7" to="/login">Login</v-btn>
-                    <v-btn class="d-flex justify-center md4 mt-7" to="/login">Register</v-btn>
+                    <v-btn class="d-flex justify-center md4 mt-7" to="/register">Register</v-btn>
                   </v-card-text>
                 </v-card>
               </v-flex>
@@ -38,3 +34,9 @@
     </v-app>
   </div>
 </template>
+
+<script>
+  export default {
+    name: 'HelloWorld',
+  }
+</script>
