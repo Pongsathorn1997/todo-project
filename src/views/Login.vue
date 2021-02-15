@@ -43,8 +43,8 @@
                   <!-- this is the login bottom-->
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue" @click="userLogin" type="submit">Login</v-btn>
-                    <v-btn color="green" @click="googleLogin" type="submit">Google Login</v-btn>
+                    <v-btn color="blue" dark @click="userLogin" type="submit">Login</v-btn>
+                    <v-btn color="green" dark @click="googleLogin" type="submit">Google Login</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-flex>

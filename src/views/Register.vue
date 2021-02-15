@@ -4,7 +4,7 @@
       <v-content>
 
         <!--This is the upper blue thing-->
-        <v-app-bar color="primary"
+        <v-app-bar color="red"
                    dense
                    dark
         >
@@ -19,7 +19,7 @@
           <v-layout align-center justify-center>
             <v-flex xs12 sm8 md4>
               <v-card class="elevation-12">
-                <v-toolbar color="primary" dark flat>
+                <v-toolbar color="red" dark flat>
                   <v-toolbar-title>Login form</v-toolbar-title>
                 </v-toolbar>
                 <!--this is the input text field for username and password-->
@@ -62,7 +62,7 @@
                 <!-- this is the login bottom-->
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" @click="userRegister" type="submit">Register</v-btn>
+                  <v-btn color="red" dark @click="userRegister" type="submit">Register</v-btn>
                 </v-card-actions>
 
               </v-card>
@@ -110,7 +110,7 @@ export default {
                     displayName: this.name
                   })
                   .then(() => {
-                    this.$store.dispatch('userRegister', { data, });
+                    this.$store.dispatch('userRegister', data);
                     alert("Register Successfully !!")
                     this.$router.push('/login')
                   });
