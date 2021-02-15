@@ -35,7 +35,7 @@
                           label="Password"
                           name="password"
                           type="password"
-                          @keyup.enter="userLogin"
+                          @keyup.enter="Login"
                       >
                       </v-text-field>
                     </v-form>
@@ -43,7 +43,7 @@
                   <!-- this is the login bottom-->
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue" dark @click="userLogin" type="submit">Login</v-btn>
+                    <v-btn color="blue" dark @click="Login" type="submit">Login</v-btn>
                     <v-btn color="green" dark @click="googleLogin" type="submit">Google Login</v-btn>
                   </v-card-actions>
                 </v-card>
@@ -75,13 +75,13 @@ export default {
     password: { required },
   },
   methods: {
-    userLogin(){
+    Login(){
       this.$v.$touch();
       firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then((data) => {
-            this.$store.dispatch('userLogin', data.user);
+            this.$store.dispatch('Login', data.user);
             this.$store.dispatch('userRegister', { data });
             this.$router.push('/todo')
           })
@@ -93,7 +93,7 @@ export default {
     googleLogin() {
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider).then((data) => {
-        this.$store.dispatch('userLogin', data.user);
+        this.$store.dispatch('Login', data.user);
         this.$store.dispatch('userRegister', { data });
         this.$router.push('/todo')
       }).catch((err) => {

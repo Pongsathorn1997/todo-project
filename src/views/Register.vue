@@ -49,14 +49,6 @@
                         required
                     ></v-text-field>
 
-                    <v-text-field
-                        v-model="confirmPassword"
-                        type="password"
-                        label="Confirm Password"
-                        hint="Confirm your password "
-                        required
-                    ></v-text-field>
-
                   </v-form>
                 </v-card-text>
                 <!-- this is the login bottom-->
@@ -77,7 +69,7 @@
 
 <script>
 import firebase from "firebase";
-import { required, email, minLength, sameAs,} from 'vuelidate/lib/validators';
+import { required, email, minLength,} from 'vuelidate/lib/validators';
 import { validationMixin } from 'vuelidate';
 
 export default {
@@ -95,12 +87,10 @@ export default {
     name: {required},
     email: {required, email},
     password: {required, minLength: minLength(6)},
-    confirmedPassword: { required, sameAsPassword: sameAs('password') },
   },
   methods: {
     userRegister() {
       this.$v.$touch();
-      if (this.password === this.confirmPassword) {
         firebase
             .auth()
             .createUserWithEmailAndPassword(this.email, this.password)
@@ -116,12 +106,9 @@ export default {
                   });
             })
             .catch(err => {
-              alert(err.message);
+              console.log(err.message);
+              alert("please try again");
             });
-      }
-      else {
-        alert("Password and Confirm Password need to be the same")
-      }
     }
   },
 }

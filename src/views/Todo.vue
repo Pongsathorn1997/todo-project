@@ -1,13 +1,28 @@
 <template>
   <div id="todo">
+    <v-app-bar color="blue"
+               dense
+               dark
+    >
+      <v-toolbar-title>Welcome to your Todo App!</v-toolbar-title>
+    </v-app-bar>
+    <v-parallax
+        dark
+        src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+        style="height: 100vh"
+    >
     <v-container align-center justify-center>
       <v-layout align-center justify-center>
         <v-flex xs12 sm6 justify-center align-center>
-          <v-text-field label="What needs to be done?" @keydown.enter="createTodo" v-model="inputTodo">
+          <v-text-field dark label="What needs to be done?" @keydown.enter="createTodo" v-model="inputTodo">
             <v-icon slot="append" color="blue" > mdi-plus </v-icon>
           </v-text-field>
-          <v-card v-for="items in todos" v-bind:key="items.text" v-model="inputTodo" class="mx-auto">
-            <v-card-title>
+          <v-card
+              v-for="items in todos"
+              v-bind:key="items.text"
+              v-model="inputTodo"
+              class="mx-auto"
+          ><v-card-title>
               <v-checkbox color="success"></v-checkbox>
               {{ items.text }}
               <v-spacer></v-spacer>
@@ -15,7 +30,7 @@
                 <v-icon color="orange">mdi-plus</v-icon>
               </v-btn>
               <v-btn icon>
-                <v-icon color="red">mdi-delete</v-icon>
+                <v-icon color="red" @click="deleteTodo">mdi-delete</v-icon>
               </v-btn>
             </v-card-title>
           </v-card>
@@ -27,13 +42,14 @@
         </v-flex>
       </v-layout>
     </v-container>
-
+    </v-parallax>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase';
 import 'firebase/database';
+
 
 export default {
   name: 'Todos',
@@ -55,11 +71,17 @@ export default {
   },
   methods: {
     createTodo() {
-      this.todoRef.push({
-        text: this.inputTodo.trim(),
-        isDone: false,
-      });
+      this.todoRef.push({ text: this.inputTodo.trim(), isDone: false,});
       this.inputTodo = '';
+    },
+    deleteTodo(){
+      // need to get the keyID to be able to delete
+      this.todoRef.getKey()
+    },
+    isDone(){
+      this.todoRef.push({
+
+      })
     },
     userLogout() {
       firebase
