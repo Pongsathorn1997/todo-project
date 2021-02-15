@@ -1,22 +1,18 @@
 <template>
-    <v-app>
-        <v-main>
-            <router-view/>
-        </v-main>
-    </v-app>
+  <div id="app">
+    <router-view/>
+  </div>
 </template>
 
 <script>
 
-    export default {
-        name: 'App',
+export default {
+  name: 'App',
+  components: {
+  },
 
-        components: {
-
-        },
-
-        data: () => ({
-            //
-        }),
-    };
+  data: () => ({
+    //
+  })
+}
 </script>
