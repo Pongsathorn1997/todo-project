@@ -31,7 +31,7 @@
                     <v-toolbar-title>Todo-List</v-toolbar-title>
                   <v-spacer></v-spacer>
                   <strong class="mx-3 info--text text--darken-3">
-                    Remaining: {{ todos.length }}
+                    Remaining: {{ }}
                   </strong>
                 </v-toolbar>
                 <v-card
