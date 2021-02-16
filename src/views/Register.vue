@@ -1,20 +1,13 @@
 <template>
   <div id="app">
-    <v-app id="inspire">
-      <v-content>
-
-        <!--This is the upper blue thing-->
-        <v-app-bar color="red"
-                   dense
-                   dark
-        >
-          <v-toolbar-title>This is Register Page</v-toolbar-title>
-        </v-app-bar>
-        <v-parallax
-            dark
-            src="https://miro.medium.com/max/3622/1*RoXcbaF9lIqwpMjiXg54Vw.png"
-            style="height: 100vh"
-        >
+    <v-app id="register">
+      <v-app-bar color="red"
+                 dense
+                 dark
+      >
+        <v-toolbar-title>This is Register Page</v-toolbar-title>
+      </v-app-bar>
+      <span class="image">
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
             <v-flex xs12 sm8 md4>
@@ -57,12 +50,11 @@
                   <v-btn color="red" dark @click="userRegister" type="submit">Register</v-btn>
                 </v-card-actions>
 
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
-        </v-parallax>
-      </v-content>
+                </v-card>
+              </v-flex>
+           </v-layout>
+          </v-container>
+      </span>
     </v-app>
   </div>
 </template>
@@ -113,3 +105,11 @@ export default {
   },
 }
 </script>
+
+<style>
+.image {
+  height: 100vh;
+  background: url("https://miro.medium.com/max/3622/1*RoXcbaF9lIqwpMjiXg54Vw.png");
+  background-repeat: no-repeat;
+}
+</style>

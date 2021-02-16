@@ -1,18 +1,16 @@
 <template>
   <div id="todo">
-    <v-app-bar color="blue"
-               dense
-               dark
-    >
-      <v-toolbar-title>Welcome to your Todo App!</v-toolbar-title>
-    </v-app-bar>
-    <v-parallax
-        dark
-        src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
-        style="height: 100vh"
-    >
-    <v-container align-center justify-center>
-      <v-layout align-center justify-center>
+    <v-app id="todo">
+      <v-app-bar color="purple lighten-1"
+                 dense
+                 dark
+      >
+        <v-toolbar-title>Welcome to your Todo App!</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn class='absolute' @click.prevent="userLogout"> Logout </v-btn>
+      </v-app-bar>
+      <span class="image1">
+        <v-layout class="mt-12" align-center justify-center>
         <v-flex xs12 sm6 justify-center align-center>
           <v-text-field dark label="What needs to be done?" @keydown.enter="createTodo" v-model="inputTodo">
             <v-icon slot="append" color="blue" > mdi-plus </v-icon>
@@ -34,15 +32,10 @@
               </v-btn>
             </v-card-title>
           </v-card>
-          <v-divider></v-divider>
-          <br>
-          <div class="text-center">
-            <v-btn class='absolute' @click.prevent="userLogout"> Logout </v-btn>
-          </div>
         </v-flex>
       </v-layout>
-    </v-container>
-    </v-parallax>
+      </span>
+    </v-app>
   </div>
 </template>
 
@@ -95,7 +88,12 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style>
+.image1 {
+  height: 100vh;
+  background: url("https://www.wallpapermaiden.com/image/2016/12/07/alto-s-adventure-minimalistic-artwork-games-10412.png");
+  background-repeat: no-repeat;
+}
 </style>
 
 
