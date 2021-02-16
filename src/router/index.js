@@ -1,47 +1,38 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from "@/views/Login";
-import Register from "@/views/Register";
-import Todo from "@/views/Todo";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Login from '@/views/Login.vue';
+import Register from '@/views/Register.vue';
+import Todo from '@/views/Todo.vue';
 import firebase from '@/plugins/firebase';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home,
-    meta:{
-      requiredLogin: false,
-    },
-  },
-  {
     path: '/login',
     name: 'Login',
+    alias: '/',
     component: Login,
-    meta:{
-      requiredLogin: false,
+    meta: {
+      requiresLogin: false,
     },
   },
   {
     path: '/register',
-    name: 'Register',
     component: Register,
-    meta:{
-      requiredLogin: false,
+    meta: {
+      requiresLogin: false,
     },
   },
   {
-    path: '/todo',
-    name: 'Todo',
+    path: '/todos',
+    name: 'Todos',
     component: Todo,
-    meta:{
-      requiredLogin: true,
+    meta: {
+      requiresLogin: true,
     },
   },
-]
+];
 
 const router = new VueRouter({
   mode: 'hash',
@@ -49,18 +40,15 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const identifyUser = to.matched.some((record) => record.meta.requiredLogin);
-  if (identifyUser && !await firebase.getCurrentUser()) {
-    next({ name: 'Login' });
-  }
-  else if (!identifyUser && await firebase.getCurrentUser()){
-    next({ name: 'Todo'});
-  }
-  else {
+  const requiresLogin = to.matched.some((record) => record.meta.requiresLogin);
+  if (requiresLogin && !await firebase.getCurrentUser()) {
+    next('Login');
+  } else if (!requiresLogin && await firebase.getCurrentUser()) {
+    next('Todos');
+  } else {
     next();
   }
 });
-
 Vue.$router = router;
 
-export default router
+export default router;

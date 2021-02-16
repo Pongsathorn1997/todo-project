@@ -92,7 +92,7 @@ export default {
                     displayName: this.name
                   })
                   .then(() => {
-                    this.$store.dispatch('userRegister', data);
+                    this.$store.dispatch('authenticate/userRegister', data);
                     alert("Register Successfully !!")
                     this.$router.push('/login')
                   });

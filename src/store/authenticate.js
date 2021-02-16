@@ -1,4 +1,4 @@
-export default({
+export default ({
     state: {
         user: {
             loggedIn: false,
@@ -11,26 +11,25 @@ export default({
         },
     },
     mutations: {
-        setLogin(state, data) {
-            state.user.loggedIn = data;
-        },
         setUser(state, data) {
             state.user.data = data;
-        },
-        setLogout(state, data) {
-            state.user.loggedIn = data;
         },
     },
     actions: {
         userRegister({ commit }, payload) {
-            commit('setUser', { payload });
+            if (payload) {
+                commit('setUser', payload);
+                commit('setLogin', payload === null);
+            } else {
+                commit('setUser', null);
+            }
         },
         userLogin({ commit }, payload) {
             commit('setLogin', payload !== null);
-            commit('setUser', payload)
+            commit('setUser', payload);
         },
         userLogout({ commit }, payload) {
-            commit('setLogout', payload !== null);
+            commit('setLogin', payload !== null);
             commit('setUser', payload);
         },
     },

@@ -49,22 +49,26 @@ export default {
   data() {
     return {
       todoRef: null,
-      todos: {},
+      todos: Object,
       inputTodo: '',
     };
   },
   created() {
-    this.todoRef = firebase.database().ref(`/users/${this.$store.state.auth.user.uid}`);
+    this.todoRef = firebase.database().ref(`/users/${this.$store.state.auth.user.data.uid}`);
+    this.$store.dispatch('todos/setTodoRef', this.todoRef)
   },
   mounted() {
     this.todoRef.on('value', (snapshot) => {
       this.todos = snapshot.val();
-      console.log(this.todos);
+      this.$store.dispatch('todo/setTodo', this.todos)
     });
   },
   methods: {
     createTodo() {
-      this.todoRef.push({ text: this.inputTodo.trim(), isDone: false,});
+      this.todoRef.push({
+        text: this.inputTodo.trim(),
+        isDone: false,
+      });
       this.inputTodo = '';
     },
     deleteTodo(){
@@ -81,7 +85,7 @@ export default {
           .auth()
           .signOut()
           .then(() => {
-            this.$store.dispatch('userLogout', null);
+            this.$store.dispatch('authenticate/userLogout', null);
             this.$router.push('/login')
           });
     },
