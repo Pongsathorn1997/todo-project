@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Home from '@/views/Home';
 import Login from '@/views/Login.vue';
 import Register from '@/views/Register.vue';
 import Todo from '@/views/Todo.vue';
@@ -8,6 +9,15 @@ import firebase from '@/plugins/firebase';
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: '/',
+    name: 'home',
+    alias: '/',
+    component: Home,
+    meta: {
+      requiresLogin: false,
+    }
+  },
   {
     path: '/login',
     name: 'Login',

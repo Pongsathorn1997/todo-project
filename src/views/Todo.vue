@@ -27,6 +27,13 @@
                   </v-card-text>
                 </v-card>
                 <br>
+                <v-toolbar color="purple lighten-1" dark>
+                    <v-toolbar-title>Todo-List</v-toolbar-title>
+                  <v-spacer></v-spacer>
+                  <strong class="mx-3 info--text text--darken-3">
+                    Remaining: {{ todos.length }}
+                  </strong>
+                </v-toolbar>
                 <v-card
                     v-for="(items,key) in todos"
                     v-bind:key="key"
@@ -35,13 +42,9 @@
                     v-model="inputTodo"
                     class="mx-auto"
                 >
-                  <v-toolbar color="purple lighten-1" dark>
-                    <v-toolbar-title>Todo-List</v-toolbar-title>
-                  </v-toolbar>
                   <v-card-title>
                     <v-checkbox color="success" @click="isDone(key)"></v-checkbox>
                     {{ items.text }}
-                    {{ key }}
                     <v-spacer></v-spacer>
                     <v-btn icon>
                       <v-icon color="orange">mdi-plus</v-icon>
@@ -55,34 +58,6 @@
             </v-layout>
         </v-container>
       </span>
-<!--        <v-layout class="mt-12" align-center justify-center>-->
-<!--        <v-flex xs12 sm6 justify-center align-center>-->
-<!--          <v-text-field dark label="What needs to be done?" @keydown.enter="createTodo()" v-model="inputTodo">-->
-<!--            <v-icon slot="append" color="blue" > mdi-plus </v-icon>-->
-<!--          </v-text-field>-->
-<!--          <v-card-->
-<!--              v-for="(items,key) in todos"-->
-<!--              v-bind:key="key"-->
-<!--              :todoname="key"-->
-<!--              :todovalue="items"-->
-<!--              v-model="inputTodo"-->
-<!--              class="mx-auto"-->
-<!--          ><v-card-title>-->
-<!--              <v-checkbox color="success" @click="isDone(key)"></v-checkbox>-->
-<!--              {{ items.text }}-->
-<!--              {{ key }}-->
-<!--              <v-spacer></v-spacer>-->
-<!--              <v-btn icon>-->
-<!--                <v-icon color="orange">mdi-plus</v-icon>-->
-<!--              </v-btn>-->
-<!--              <v-btn icon>-->
-<!--                <v-icon color="red" @click="deleteTodo(key)">mdi-delete</v-icon>-->
-<!--              </v-btn>-->
-<!--            </v-card-title>-->
-<!--          </v-card>-->
-<!--        </v-flex>-->
-<!--      </v-layout>-->
-<!--      </span>-->
     </v-app>
   </div>
 </template>
@@ -129,9 +104,9 @@ export default {
       firebase
           .database()
           .ref(`/users/${this.$store.state.auth.user.data.uid}/${keyID}`)
-          .set({
+          .update({
             isDone: true
-          });
+          })
     },
     userLogout() {
       firebase
